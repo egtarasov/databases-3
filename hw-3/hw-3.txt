@@ -1,0 +1,61 @@
+Table books {
+  ISBN string [primary key]
+  year int
+  title string
+  author_id uuid
+  page_count int
+  publisher_id uuid
+}
+
+Table authors {
+  id uuid [primary key]
+  first_name string
+  second_name string
+}
+
+Table book_copies {
+  id uuid [primary key]
+  ISBN string
+  shelf_position int
+}
+
+Table publishers {
+  id uuid [primary key]
+  name string
+}
+
+Table categories {
+  id uuid [primary key]
+  name string
+  parent_id uuid // parent category id.
+}
+
+Table book_categories {
+  book_ISBN uuid 
+  category_id uuid
+}
+
+Table readers {
+  id uuid [primary key]
+  first_name string
+  second_name stirng
+  address string
+  birth_date date
+}
+
+Table taken_books_copy {
+  book_copy_id uuid [ref: > book_copies.id]
+  reader_id uudi [ref: > readers.id]
+  return_date date
+}
+
+Ref: book_copies.ISBN > books.ISBN
+
+Ref: books.author_id > authors.id
+
+Ref: categories.parent_id - categories.id
+
+Ref: book_categories.book_ISBN - books.ISBN
+Ref: book_categories.category_id - categories.id
+
+Ref: publishers.id < books.publisher_id

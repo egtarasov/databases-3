@@ -1,0 +1,28 @@
+Table cities {
+  id uuid [primary key]
+  name string
+  region string
+}
+
+Table trains {
+  number uuid [primary key]
+  length int
+  start uuid [ref: > stations.id]
+  end uuid [ref: > stations.id]
+
+}
+
+Table stations {
+  id uuid [primary key]
+  name string
+  tracks_number int
+  city_id uuid [ref: > cities.id]
+}
+
+Table connections {
+  from_station_id uuid [ref: - stations.id] 
+  to_station_id uuid [ref: - stations.id]
+  train_number uuid [ref: < trains.number]
+  departure_time time
+  arival_time time
+}

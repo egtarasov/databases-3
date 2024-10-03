@@ -1,0 +1,31 @@
+version: '3.9'
+
+services:
+  db-01:
+    image: postgres:latest
+    container_name: postgres_db_1
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data_1:/var/lib/postgresql/data
+  # db-02:
+  #   image: postgres:16
+  #   container_name: postgres_db_2
+  #   environment:
+  #     POSTGRES_USER: postgres
+  #     POSTGRES_PASSWORD: postgres
+  #     POSTGRES_DB: postgres
+  #   ports:
+  #     - "5433:5432"
+  #   volumes:
+  #     - postgres_data_2:/var/lib/postgresql/data
+
+
+volumes:
+  postgres_data_1:
+  # postgres_data_2:
+
