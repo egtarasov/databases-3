@@ -29,9 +29,17 @@ CREATE TABLE stations (
 
 -- а) Найдите все прямые рейсы из Москвы в Тверь.
 select
-    c.train_id
+    train_id
 from connections c
-where c.from_station_name='Москва' and c.to_station_name='Тверь';
-
+join stations s_from on s_from.name = c.from_station_name
+join stations s_to on s_to.name = c.to_station_name
+where s_from.city_name = 'Москва' and s_to.city_name='Тверь';
 
 -- б) Найдите все многосегментные маршруты, имеющие точно однодневный трансфер из Москвы в Санкт-Петербург (первое отправление и прибытие в конечную точку должны быть в одну и ту же дату). Вы можете применить функцию DAY () к атрибутам Departure и Arrival, чтобы определить дату.  
+select
+    train_id
+from connections c
+join stations s_from on s_from.name = c.from_station_name
+join stations s_to on s_to.name = c.to_station_name
+where s_from.city_name = 'Москва' and s_to.city_name='Санкт-Петербург'
+and DATE(c.arrival)=DATE(c.departure);
