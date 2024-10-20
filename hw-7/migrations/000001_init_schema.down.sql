@@ -1,0 +1,1 @@
+drop table results, events, players, olympics, countries;
